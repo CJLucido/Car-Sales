@@ -21,32 +21,38 @@ const initialState = {
     ]
   }
 
+///that the
 
 
-  
   export default function appReducer(state = initialState, action) {
       switch (action.type){
         case REMOVE_FEATURE:
           let newFeatures = state.car.features.filter(item => {
             return item.name !== action.payload.feature
           })
+          let removedFeature = state.car.additionalFeatures.filter(item => {
+            return item.name === action.payload.additionalFeatures
+          })
               return {
                 ...state,
                 car:{
                 price: state.price - action.payload.price,
                 features: newFeatures},
-                additionalFeatures: [...state.additionalFeatures, action.payload.additionalFeatures]
+                additionalFeatures: [...state.additionalFeatures, removedFeature]
               }
             
         case ADD_FEATURE:
           let minusFeatures = state.car.additionalFeatures.filter(item => {
             return item.name !== action.payload.additionalFeatures
           })
+          let addedFeature = state.car.features.filter(item => {
+            return item.name === action.payload.feature
+          })
               return {
                 ...state,
                 car:{
                 price: state.price + action.payload.price,
-                features: [...state.features, action.payload.feature]
+                features: [...state.features, addedFeature]
               },
                 additionalFeatures: minusFeatures
               }
