@@ -1,12 +1,16 @@
 import React from 'react';
 
+import {useDispatch} from "react-redux"
+
 import {addFeature} from "../actions"
 
 const AdditionalFeature = props => {
 
+  const dispatch = useDispatch()
+
   const adder = e => {
     e.preventDefault();
-    addFeature(props)
+    dispatch(addFeature(props))
     console.log(addFeature(props))
   }
 
@@ -20,3 +24,7 @@ const AdditionalFeature = props => {
 };
 
 export default AdditionalFeature;
+
+
+  // export default connect(state =>state,
+  //   {addFeature})(AdditionalFeature);

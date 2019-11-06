@@ -21,7 +21,7 @@ const initialState = {
     ]
   }
 
-///that the
+///that the features being added or removed are coming from a filter means they are arrays, they need to be changed to objects
 
 
   export default function appReducer(state = initialState, action) {
@@ -30,7 +30,8 @@ const initialState = {
           let newFeatures = state.car.features.filter(item => {
             return item.name !== action.payload.feature
           })
-          let removedFeature = state.car.additionalFeatures.filter(item => {
+          console.log("this is newFeatures", newFeatures)
+          let removedFeature = state.additionalFeatures.filter(item => {
             return item.name === action.payload.additionalFeatures
           })
               return {
@@ -42,17 +43,21 @@ const initialState = {
               }
             
         case ADD_FEATURE:
-          let minusFeatures = state.car.additionalFeatures.filter(item => {
+          let minusFeatures = state.additionalFeatures.filter(item => {
             return item.name !== action.payload.additionalFeatures
           })
-          let addedFeature = state.car.features.filter(item => {
+          let addedFeature = state.additionalFeatures.filter(item => {
             return item.name === action.payload.feature
           })
+          //[0]
+          //.indexOf(0)
+          console.log("this is addedFeature", addedFeature)
               return {
                 ...state,
+                additionalPrice:state.additionalPrice + action.payload.price,
                 car:{
-                price: state.price + action.payload.price,
-                features: [...state.features, addedFeature]
+                price: state.car.price,// had + state.additionalPrice here but it is not useful
+                features: [...state.car.features].concat(addedFeature)
               },
                 additionalFeatures: minusFeatures
               }
