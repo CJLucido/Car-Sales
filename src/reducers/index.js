@@ -17,6 +17,17 @@ const initialState = {
   }
 
   export default function appReducer(state = initialState, action) {
-    return state
+      switch (action.type){
+        case REMOVE_FEATURE:{
+              return {...state}
+            }
+        case ADD_FEATURE:{
+            return {...state}
+        }
+        default:{
+                return state
+            }
+      }
+ 
 }
 
