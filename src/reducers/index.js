@@ -21,18 +21,50 @@ const initialState = {
     ]
   }
 
+
+
+  
   export default function appReducer(state = initialState, action) {
       switch (action.type){
-        case REMOVE_FEATURE:{
-              return {...state}
-            }
-        case ADD_FEATURE:{
-            return {...state}
-        }
-        default:{
+        case REMOVE_FEATURE:
+          let newFeatures = state.car.features.filter(item => {
+            return item.name !== action.payload.feature
+          })
+              return {
+                ...state,
+                car:{
+                price: state.price - action.payload.price,
+                features: newFeatures},
+                additionalFeatures: [...state.additionalFeatures, action.payload.additionalFeatures]
+              }
+            
+        case ADD_FEATURE:
+          let minusFeatures = state.car.additionalFeatures.filter(item => {
+            return item.name !== action.payload.additionalFeatures
+          })
+              return {
+                ...state,
+                car:{
+                price: state.price + action.payload.price,
+                features: [...state.features, action.payload.feature]
+              },
+                additionalFeatures: minusFeatures
+              }
+        
+        default:
                 return state
-            }
+            
       }
  
 }
 
+//add additional feature to state.features
+//delete additional feature by id from state.additionalFeatures
+//add incoming state.additionalFeature.price to state.car.price
+//what should be the payload? on the reducer I want certain aspects to be changing (the price, the features, and the additionalFeatures)
+
+
+
+//rmv
+//do the opposite of above
+//subtract reduced additionalFeatures prices from state.car.price
