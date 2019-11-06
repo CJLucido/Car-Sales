@@ -6,7 +6,7 @@ import {addFeature} from "../actions"
 
 const AdditionalFeature = props => {
 
-  const dispatch = useDispatch()
+  const dispatch = useDispatch() // I used this because the connect method, although calling the action and setting the payload - was not reaching the reducer
 
   const adder = e => {
     e.preventDefault();

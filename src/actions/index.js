@@ -15,7 +15,7 @@ export const removeFeature = props => {
     return{
         type: REMOVE_FEATURE,
         payload: {
-            price:props.feature.price,
+            //price:props.feature.price,
             feature: props.feature.name,
             additionalFeatures: props.feature.name}
         }

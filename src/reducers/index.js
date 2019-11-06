@@ -30,16 +30,19 @@ const initialState = {
           let newFeatures = state.car.features.filter(item => {
             return item.name !== action.payload.feature
           })
-          console.log("this is newFeatures", newFeatures)
-          let removedFeature = state.additionalFeatures.filter(item => {
+     
+          let removedFeature = state.car.features.filter(item => {
             return item.name === action.payload.additionalFeatures
           })
+          console.log("this is removedFeatures", removedFeature)
+          let removeCost = removedFeature.price
+          console.log("this is removedFeatures.price", removedFeature.price)
               return {
                 ...state,
                 car:{
-                price: state.price - action.payload.price,
+                price: state.price - removeCost,
                 features: newFeatures},
-                additionalFeatures: [...state.additionalFeatures, removedFeature]
+                additionalFeatures: [...state.additionalFeatures].concat(removedFeature) 
               }
             
         case ADD_FEATURE:
