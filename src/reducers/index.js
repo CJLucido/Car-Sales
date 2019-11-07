@@ -37,11 +37,14 @@ const initialState = {
           console.log("this is removedFeatures", removedFeature)
           let removeCost = removedFeature[0].price
           console.log("this is removedCost", removeCost)
+          console.log("additionalPrice", state.additionalPrice)
               return {
                 ...state,
-                additionalPrice:state.additionalPrice - removeCost,
+                additionalPrice: state.additionalPrice - removeCost,
                 car:{
-                features: newFeatures},
+                  price: state.car.price, //this has to be set to ensure that the price stays a number
+                features: newFeatures
+                },
                 additionalFeatures: [...state.additionalFeatures].concat(removedFeature) 
               }
             
