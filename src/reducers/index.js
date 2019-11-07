@@ -35,12 +35,12 @@ const initialState = {
             return item.name === action.payload.additionalFeatures
           })
           console.log("this is removedFeatures", removedFeature)
-          let removeCost = removedFeature.price
-          console.log("this is removedFeatures.price", removedFeature.price)
+          let removeCost = removedFeature[0].price
+          console.log("this is removedCost", removeCost)
               return {
                 ...state,
+                additionalPrice:state.additionalPrice - removeCost,
                 car:{
-                price: state.price - removeCost,
                 features: newFeatures},
                 additionalFeatures: [...state.additionalFeatures].concat(removedFeature) 
               }
